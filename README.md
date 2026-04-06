@@ -16,7 +16,7 @@ Este script en Python recopila ofertas hipotecarias reales de múltiples foros e
 
 ## 📋 Requisitos
 
-- Python 3.8+
+- Python 3.11.9
 - Dependencias listadas en `requirements.txt`
 - Emergent LLM Key (ya configurada en `.env`)
 
