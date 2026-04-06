@@ -1,0 +1,277 @@
+================================================================================
+🏦 SCRAPER DE OFERTAS HIPOTECARIAS - ESTRUCTURA DEL PROYECTO
+================================================================================
+
+📁 /app/mortgage_scraper/
+│
+├── 📄 README.md                    # Documentación principal del proyecto
+├── 📄 GUIA_USO.md                  # Guía rápida de uso y troubleshooting
+├── 📄 INDEX.txt                    # Este archivo - índice del proyecto
+│
+├── 🔧 ARCHIVOS DE CONFIGURACIÓN
+│   ├── .env                        # Variables de entorno (EMERGENT_LLM_KEY)
+│   ├── requirements.txt            # Dependencias de Python
+│   └── config.py                   # Configuración personalizable
+│
+├── 🚀 SCRIPTS PRINCIPALES
+│   ├── scraper.py                  # Script principal de scraping
+│   ├── run_with_config.py          # Ejecuta scraper con config.py
+│   └── analyze.py                  # Análisis de datos extraídos
+│
+└── 📂 output/                      # Carpeta de resultados (CSV/Excel)
+
+================================================================================
+🚀 COMANDOS RÁPIDOS
+================================================================================
+
+1. INSTALACIÓN
+   cd /app/mortgage_scraper
+   pip install -r requirements.txt
+
+2. TEST DE VALIDACIÓN
+   python test_scraper.py
+   → Verifica que todo esté configurado correctamente
+
+3. DEMO (3 hilos por foro)
+   python demo.py
+   → Scraping rápido para probar
+
+4. SCRAPING COMPLETO (20 hilos por foro)
+   python scraper.py
+   → Extracción completa de ofertas
+
+5. SCRAPING CON CONFIGURACIÓN PERSONALIZADA
+   python run_with_config.py
+   → Usa configuración de config.py
+
+6. ANÁLISIS DE RESULTADOS
+   python analyze.py
+   → Genera estadísticas de los datos extraídos
+
+================================================================================
+📊 ARCHIVOS GENERADOS
+================================================================================
+
+output/
+├── ofertas_hipotecarias_YYYYMMDD_HHMMSS.csv     # Datos en CSV
+├── ofertas_hipotecarias_YYYYMMDD_HHMMSS.xlsx    # Datos en Excel
+└── analisis_resumen.txt                         # Reporte de análisis
+
+================================================================================
+🧠 FUNCIONALIDADES PRINCIPALES
+================================================================================
+
+✅ Scraping de múltiples foros españoles:
+   • Rankia (https://www.rankia.com/foros/hipotecas)
+   • Bogleheads España (https://bogleheads.es/foro/)
+   • Forocoches (https://www.forocoches.com/)
+   • Mediavida (opcional)
+   • Soloarquitectura (opcional)
+
+✅ Extracción inteligente con IA:
+   • OpenAI GPT-4o con Emergent LLM Key
+   • Identificación automática de ofertas hipotecarias
+   • Estructuración de datos no estructurados
+
+✅ Filtrado inteligente:
+   • Por keywords relevantes
+   • Por fecha (últimos 24 meses por defecto)
+   • Eliminación de duplicados
+
+✅ Datos extraídos por oferta:
+   • Banco
+   • TIN Oficial
+   • TIN Negociado
+   • TAE
+   • Diferencia (puntos porcentuales)
+   • Tipo (fija/variable/mixta)
+   • Condiciones (seguros, nómina, vinculaciones)
+   • Contexto (broker, negociación directa, etc.)
+   • Resumen del caso
+   • URL del hilo original
+
+✅ Exportación múltiple:
+   • CSV (compatible con Excel, Google Sheets)
+   • Excel (.xlsx) con formato
+   • JSON (opcional, configurable)
+
+✅ Análisis de datos:
+   • Estadísticas generales
+   • Top bancos por número de ofertas
+   • Mejores ofertas por TIN
+   • Distribución por tipo de hipoteca
+   • Análisis de condiciones comunes
+
+================================================================================
+⚙️ CONFIGURACIÓN PERSONALIZADA (config.py)
+================================================================================
+
+Parámetros modificables:
+
+• MAX_THREADS_PER_FORUM = 20        # Hilos a procesar por foro
+• MAX_POST_AGE_MONTHS = 24          # Antigüedad máxima de posts
+• REQUEST_DELAY_SECONDS = 1         # Pausa entre requests
+• AI_MODEL = "gpt-4o"               # Modelo de IA
+• ENABLE_RANKIA = True              # Activar/desactivar foros
+• EXPORT_CSV = True                 # Formatos de exportación
+• LOG_LEVEL = "INFO"                # Nivel de logging
+
+================================================================================
+🔧 TECNOLOGÍAS UTILIZADAS
+================================================================================
+
+Lenguaje:
+  • Python 3.11
+
+Librerías principales:
+  • requests           → HTTP requests
+  • beautifulsoup4     → Parsing HTML
+  • playwright         → Páginas dinámicas JavaScript (opcional)
+  • pandas             → Estructuración y análisis de datos
+  • openpyxl           → Exportación a Excel
+  • emergentintegrations → Integración con OpenAI GPT-4o
+  • python-dotenv      → Gestión de variables de entorno
+
+================================================================================
+📈 FLUJO DE TRABAJO DEL SCRAPER
+================================================================================
+
+1. RECOLECCIÓN
+   └─ Busca hilos relevantes en cada foro activo
+   └─ Filtra por keywords y fecha
+
+2. EXTRACCIÓN
+   └─ Accede a cada hilo
+   └─ Limpia HTML y extrae texto plano
+   └─ Verifica relevancia del contenido
+
+3. ANÁLISIS CON IA
+   └─ Envía texto a GPT-4o
+   └─ Extrae datos estructurados
+   └─ Identifica ofertas reales con números
+
+4. NORMALIZACIÓN
+   └─ Estandariza formatos (porcentajes, fechas)
+   └─ Calcula diferencias entre TIN oficial/negociado
+   └─ Elimina duplicados
+
+5. EXPORTACIÓN
+   └─ Genera CSV con todos los datos
+   └─ Crea Excel formateado
+   └─ Muestra estadísticas en consola
+
+================================================================================
+🛡️ CONSIDERACIONES ÉTICAS Y LEGALES
+================================================================================
+
+✅ Datos públicos: Solo extrae información pública de foros
+✅ No datos personales: No recopila emails, nombres, teléfonos
+✅ Rate limiting: Incluye pausas para no sobrecargar servidores
+✅ User-Agent: Identifica requests apropiadamente
+✅ Robots.txt: Respeta políticas de scraping de cada sitio
+✅ Uso educativo: Para investigación y comparación personal
+
+================================================================================
+🐛 SOLUCIÓN DE PROBLEMAS COMUNES
+================================================================================
+
+PROBLEMA: Module not found
+SOLUCIÓN: pip install -r requirements.txt --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/
+
+PROBLEMA: EMERGENT_LLM_KEY no encontrada
+SOLUCIÓN: Verificar que existe /app/mortgage_scraper/.env con la key
+
+PROBLEMA: Timeout en scraping
+SOLUCIÓN: Reducir MAX_THREADS_PER_FORUM en config.py a 10 o menos
+
+PROBLEMA: No se encuentran ofertas
+SOLUCIÓN: Aumentar MAX_THREADS_PER_FORUM a 50+ para más datos
+
+PROBLEMA: Rate limit de IA
+SOLUCIÓN: Aumentar REQUEST_DELAY_SECONDS en config.py
+
+PROBLEMA: Foro no accesible
+SOLUCIÓN: Desactivar ese foro en config.py (ENABLE_NOMBRE = False)
+
+================================================================================
+📚 DOCUMENTACIÓN ADICIONAL
+================================================================================
+
+• README.md       → Documentación técnica completa
+• GUIA_USO.md     → Guía de uso paso a paso
+• config.py       → Comentarios sobre cada parámetro
+• scraper.py      → Docstrings en cada función
+
+================================================================================
+📞 NOTAS IMPORTANTES
+================================================================================
+
+⏱️  Tiempo estimado:
+   • Normal (20 hilos): 15-30 minutos
+   • Completo (50 hilos): 45-90 minutos
+
+💡 Consejos:
+   • Ejecutar test_scraper.py primero
+   • Probar demo.py antes del scraping completo
+   • Ajustar config.py según necesidades
+   • Revisar manualmente algunos resultados
+
+🔐 Seguridad:
+   • EMERGENT_LLM_KEY está incluida en .env
+   • No compartir archivos .env públicamente
+   • Los datos extraídos son solo para uso personal
+
+================================================================================
+✅ CHECKLIST PRE-EJECUCIÓN
+================================================================================
+
+[ ] Python 3.8+ instalado
+[ ] Dependencias instaladas (pip install -r requirements.txt)
+[ ] Archivo .env existe con EMERGENT_LLM_KEY
+[ ] Test pasado correctamente (python test_scraper.py)
+[ ] Carpeta output/ existe
+[ ] Conexión a internet estable
+[ ] Tiempo disponible (30-60 min para scraping completo)
+
+================================================================================
+🎯 INICIO RÁPIDO (3 PASOS)
+================================================================================
+
+1. cd /app/mortgage_scraper
+2. python test_scraper.py      # Validar configuración
+3. python scraper.py            # ¡Scrapear!
+
+================================================================================
+📊 EJEMPLO DE OUTPUT ESPERADO
+================================================================================
+
+🏦 SCRAPER DE OFERTAS HIPOTECARIAS
+================================================================================
+Total de ofertas encontradas: 47
+
+Bancos únicos: 12
+
+Distribución por tipo:
+fija        25
+variable    15
+mixta        7
+
+✓ Archivos guardados en:
+  - output/ofertas_hipotecarias_20260115_143022.csv
+  - output/ofertas_hipotecarias_20260115_143022.xlsx
+================================================================================
+
+================================================================================
+📧 PROYECTO DESARROLLADO PARA
+================================================================================
+
+Script automatizado de scraping y extracción de ofertas hipotecarias reales
+de usuarios en España desde foros especializados.
+
+Versión: 1.0
+Fecha: Enero 2026
+Stack: Python 3.11 + OpenAI GPT-4o + BeautifulSoup + Pandas
+
+================================================================================
+FIN DEL INDEX
+================================================================================

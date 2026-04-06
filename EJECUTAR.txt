@@ -1,0 +1,3 @@
+cd C:\Users\Nicolás\Desktop\script
+venv\Scripts\activate
+python scraper.py
